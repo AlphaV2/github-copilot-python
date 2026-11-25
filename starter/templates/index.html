@@ -2,17 +2,72 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sudoku Game</title>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-  <h1>Sudoku Game</h1>
+  <header class="page-header">
+    <h1>Sudoku Game</h1>
+    <div class="theme-control">
+      <button id="theme-toggle" type="button" aria-pressed="false">Switch to dark mode</button>
+      <span id="theme-status" role="status" aria-live="polite"></span>
+    </div>
+  </header>
   <div id="sudoku-board"></div>
+  <div class="game-status">
+    <span>Time: <time id="timer">00:00</time></span>
+    <span>Hints used: <span id="hints-used">0</span></span>
+  </div>
   <div class="controls">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty" name="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium" selected>Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button id="hint">Hint</button>
     <button id="new-game">New Game</button>
     <button id="check-solution">Check Solution</button>
-    <span id="message"></span>
+    <span id="message" role="status" aria-live="polite"></span>
+    <span id="input-feedback" class="visually-hidden" role="status" aria-live="polite"></span>
   </div>
+  <dialog id="name-dialog" aria-labelledby="name-dialog-title" aria-describedby="name-dialog-description">
+    <form id="name-entry-form">
+      <h2 id="name-dialog-title">Save your score</h2>
+      <p id="name-dialog-description">Enter your name to add this completed game to the leaderboard.</p>
+      <label for="player-name">Name</label>
+      <input id="player-name" name="playerName" type="text" maxlength="30" autocomplete="nickname" aria-describedby="name-error" autofocus required>
+      <p id="name-error" role="alert" aria-live="polite"></p>
+      <div class="dialog-actions">
+        <button type="submit">Save Score</button>
+        <button id="skip-name" type="button">Skip</button>
+      </div>
+    </form>
+  </dialog>
+  <section class="leaderboard" aria-labelledby="leaderboard-title">
+    <h2 id="leaderboard-title">Top 10 Fastest Games</h2>
+    <p id="leaderboard-status" role="status" aria-live="polite"></p>
+    <p id="leaderboard-empty">No completed scores yet.</p>
+    <div class="leaderboard-scroll">
+      <table id="leaderboard-table" hidden>
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Player</th>
+            <th scope="col">Time</th>
+            <th scope="col">Hints</th>
+            <th scope="col">Difficulty</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
+  </section>
+  <script src="/static/theme.js"></script>
+  <script src="/static/game_timer.js"></script>
+  <script src="/static/board_validation.js"></script>
+  <script src="/static/leaderboard.js"></script>
   <script src="/static/main.js"></script>
 </body>
 </html>

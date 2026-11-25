@@ -42,6 +42,43 @@ python app.py
 
 7. Open http://127.0.0.1:5000 in your browser.
 
+#### Windows PowerShell
+
+The following is the Windows alternative to the virtual-environment,
+installation, and launch commands above. From the repository root, use:
+
+```powershell
+Set-Location starter
+py -3 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python app.py
+```
+
+To run tests, return to the repository root after starting the application or
+open another terminal there.
+
+## Running Tests
+
+From the repository root, run:
+
+```bash
+python -m pytest
+```
+
+The frontend timer tests use Node.js's built-in test runner:
+
+```bash
+node --test tests/board_validation.test.cjs tests/game_client.test.cjs tests/game_timer.test.cjs
+```
+
+This targeted command does not include the leaderboard and theme tests. To run
+all current JavaScript test files from the repository root:
+
+```bash
+node --test tests/board_validation.test.cjs tests/game_client.test.cjs tests/game_timer.test.cjs tests/leaderboard.test.cjs tests/theme.test.cjs
+```
+
 ## Project Instructions
 
 Use GitHub Copilot to refactor the code for this game to add more advanced features. The goal is to create a more modern and maintainable codebase and add additional functionality to the final product. You can use any combination of code completion and chat features, like Ask, Edit, or Agent modes.
